@@ -14,7 +14,7 @@ export async function auth(req: Request | any, res: Response, next: NextFunction
     console.log("authorization",authorization)
     if (!authorization) {
       console.log("Authentication required. Please login");
-      return res.status(401).json({ msg: "Authentication required. Please login" })
+      return res.status(401).json({ msg: "token required. Please login" })
     }
 
     const token = req.body.token || req.headers.token;
