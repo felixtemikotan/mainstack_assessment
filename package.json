@@ -11,8 +11,7 @@
     "lint": "npx eslint --ext .ts src/",
     "lint:tests": "npx eslint --ext .ts spec/",
     "dev": "nodemon ./bin/www",
-    "test": "NODE_ENV=test npx jest --verbose --runInBand",
-    "deploy": "git add . && git commit -m Heroku && git push heroku main"
+    "test": "NODE_ENV=test npx jest --verbose --runInBand"
   },
   "author": "Felix Temikotan",
   "pre-commit": [
