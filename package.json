@@ -5,15 +5,22 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc -w",
-    "start": "node ./bin/www",
+    "start": "node ./dist/app.js",
     "build": "tsc",
+    "postinstall": "tsc",
     "lint": "npx eslint --ext .ts src/",
     "lint:tests": "npx eslint --ext .ts spec/",
-    "dev": "nodemon ./bin/www",
-    "test": "jest"
+    "dev": "nodemon ./dist/app.js",
+    "test": "NODE_ENV=test npx jest --verbose --runInBand",
+    "deploy": "git add . && git commit -m Heroku && git push heroku main"
   },
+  "author": "Felix Temikotan",
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "keywords": [],
-  "author": "QRaba Inc.",
   "license": "ISC",
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
