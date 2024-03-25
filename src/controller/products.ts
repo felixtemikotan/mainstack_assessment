@@ -1,6 +1,6 @@
 import  { Request, Response, NextFunction } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { addProductValidator,options } from "../utils/utils";
+import { addProductValidator,options, updateProductValidator } from "../utils/utils";
 import { connectToCluster } from "../config/database.config";
 import {DB_URI,JWT_SECRET} from "../config/config";
 import jwt, { JwtPayload } from 'jsonwebtoken';
@@ -44,7 +44,7 @@ export async function addProduct(req:Request,res:Response){
 export async function updateProduct(req:Request,res:Response){
     try{
         console.log('Updating products...');
-        const {error} = addProductValidator.validate(req.body,options);
+        const {error} = updateProductValidator.validate(req.body,options);
         if(error){
             return res.status(400).json({status:400,message:error.details[0].message})
         }
@@ -112,6 +112,42 @@ export async function getAllProducts(req:Request,res:Response){
 
     }catch(error:any){
         console.log(error);
+        return res.status(500).json({status:500,message:error.message})
+    }
+}
+
+export async function sellProduct(req:Request,res:Response){
+    try{
+        console.log('Selling products...');
+        const {quantity} = req.body;
+        const mongoClient = new MongoClient(DB_URI);
+        await mongoClient.connect();
+        const db = mongoClient.db('xilefplayground');
+        const collection = db.collection('productsCollection');
+        const product = await collection.findOne({id:req.params.id});
+        if(product){
+            if(product.totalItems < quantity){
+                return res.status(400).json({status:400,message:'Insufficient items!'})
+            }
+            const result = await collection.updateOne({
+                id:req.params.id
+            },{
+                $set:{
+                    remainingItems:product.remainingItems-quantity,
+                    itemsSold:product.itemsSold+quantity,
+                }
+            });
+            if(result?.modifiedCount){
+                return res.status(200).json({status:200,message:'Selling products...'})
+            }else{
+                return res.status(400).json({status:400,message:'Failed to sell products!'})
+            }
+        }else{
+            return res.status(404).json({status:404,message:'Product not found!'})
+        }
+
+    }catch(error:any){
+        console.log(error)
         return res.status(500).json({status:500,message:error.message})
     }
 }

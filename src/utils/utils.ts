@@ -21,6 +21,14 @@ export const addProductValidator = Joi.object().keys({
   totalItems: Joi.number().required(),
 
 })
+export const updateProductValidator = Joi.object().keys({
+  name: Joi.string().trim().optional(),
+  price: Joi.number().optional(),
+  description: Joi.string().trim().optional(),
+  category: Joi.string().trim().optional(),
+  totalItems: Joi.number().optional(),
+
+})
 export const options = {
     abortEarly:
       false,

@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use('/user', user);
+app.use('/product',products)
 
 app.use(function (req:Request, res:Response, next:NextFunction) {
   next(createError(404));
