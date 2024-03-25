@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc -w",
-    "start": "node node ./bin/www",
+    "start": "node ./bin/www",
     "build": "tsc",
     "postinstall": "tsc",
     "lint": "npx eslint --ext .ts src/",
     "lint:tests": "npx eslint --ext .ts spec/",
     "dev": "nodemon ./bin/www",
-    "test": "NODE_ENV=test npx jest --verbose --runInBand"
+    "test": "jest",
+    "deploy": "git add . && git commit -m Heroku && git push heroku main"
   },
   "author": "Felix Temikotan",
   "pre-commit": [
