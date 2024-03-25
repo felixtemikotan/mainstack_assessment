@@ -31,7 +31,15 @@ export async function addProduct(req:Request,res:Response){
             itemsSold:0,
         });
         if(result?.insertedId){
-        return res.status(200).json({status:200,message:'Product added successfully!',product:result.ops[0],id:result.insertedId})
+        return res.status(200).json({status:200,message:'Product added successfully!',product:{
+            id:result.insertedId,
+            name,
+            price,
+            description,
+            category,
+            totalItems,
+        
+        }})
         }else{
             return res.status(400).json({status:400,message:'Failed to add products!'})
         }
