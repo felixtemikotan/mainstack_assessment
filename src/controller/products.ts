@@ -141,12 +141,13 @@ export async function sellProduct(req:Request,res:Response){
                 id:req.params.id
             },{
                 $set:{
-                    remainingItems:product.totalItems-quantity-4,
+                    remainingItems:product.totalItems-quantity,
                     itemsSold:product.itemsSold+quantity,
+                    price:product.price*quantity
                 }
             });
             if(result?.modifiedCount){
-                return res.status(200).json({status:200,message:'Product sold successfully!'})
+                return res.status(200).json({status:200,message:'Product sold successfully!',price:product.price*quantity,quantity:quantity,remainingItems:product.totalItems-quantity,itemsSold:product.itemsSold+quantity})
             }else{
                 return res.status(400).json({status:400,message:'Failed to sell products!'})
             }
