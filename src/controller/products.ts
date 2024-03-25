@@ -73,7 +73,7 @@ export async function updateProduct(req:Request,res:Response){
             }
         });
         if(result?.modifiedCount){
-        return res.status(200).json({status:200,message:'Updating products...'})
+        return res.status(200).json({status:200,message:'Product updated successfully!'})
         }else{
             return res.status(400).json({status:400,message:'Failed to update products!'})
         }
@@ -93,7 +93,7 @@ export async function getSingleProduct(req:Request,res:Response){
         const collection = db.collection('productsCollection');
         const product = await collection.findOne({id:req.params.id});
         if(product){
-        return res.status(200).json({status:200,message:'Fetching single product...',product})
+        return res.status(200).json({status:200,message:'Product fetched successfully',product})
         }else{
             return res.status(404).json({status:404,message:'Product not found!'})
         }
@@ -113,7 +113,7 @@ export async function getAllProducts(req:Request,res:Response){
         const collection = db.collection('productsCollection');
         const products = await collection.find().toArray();
         if(products){
-        return res.status(200).json({status:200,message:'Fetching all products...',products})
+        return res.status(200).json({status:200,message:'Products fetched successfully',products})
         }else{
             return res.status(404).json({status:404,message:'No products found!'})
         }
@@ -146,7 +146,7 @@ export async function sellProduct(req:Request,res:Response){
                 }
             });
             if(result?.modifiedCount){
-                return res.status(200).json({status:200,message:'Selling products...'})
+                return res.status(200).json({status:200,message:'Product sold successfully!'})
             }else{
                 return res.status(400).json({status:400,message:'Failed to sell products!'})
             }
