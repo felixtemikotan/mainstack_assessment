@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc -w",
-    "start": "node ./dist/app.js",
+    "start": "node node ./bin/www",
     "build": "tsc",
     "postinstall": "tsc",
     "lint": "npx eslint --ext .ts src/",
     "lint:tests": "npx eslint --ext .ts spec/",
-    "dev": "nodemon ./dist/app.js",
+    "dev": "nodemon node ./bin/www",
     "test": "NODE_ENV=test npx jest --verbose --runInBand",
     "deploy": "git add . && git commit -m Heroku && git push heroku main"
   },
