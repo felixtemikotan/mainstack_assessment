@@ -141,7 +141,7 @@ export async function sellProduct(req:Request,res:Response){
                 id:req.params.id
             },{
                 $set:{
-                    remainingItems:product.remainingItems-quantity,
+                    remainingItems:product.totalItems-quantity,
                     itemsSold:product.itemsSold+quantity,
                 }
             });
