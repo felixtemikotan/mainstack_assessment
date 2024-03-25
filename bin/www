@@ -17,7 +17,7 @@ var server = http.createServer(app);
 
 
 
-server.listen(port);
+server.listen({ port: port, host: '0.0.0.0'});
 
 server.on('error', (error) => {
     if (error.syscall !== 'listen') {

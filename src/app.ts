@@ -7,6 +7,7 @@ import user from "./routes/user";
 import products from "./routes/products";
 import { connectToCluster } from "./config/database.config";
 import {DB_URI} from "./config/config";
+const Port = process.env.PORT || 3000;
 const app = express()
 
 app.use(cors());
