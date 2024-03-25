@@ -20,9 +20,6 @@ connectToCluster(DB_URI).then((client) => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', (req:Request, res:Response) => {
-  res.send('MainStack Assessment API');
-});
 app.use('/user', user);
 app.use('/product',products)
 
