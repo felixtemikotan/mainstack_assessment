@@ -30,18 +30,15 @@ export async function createUser(req:Request,res:Response){
            password:passwordHash,
         });
         if(result?.insertedId){
-        console.log('User created successfully!',result);
         return res.status(201).json({status:201,message:'User created successfully!',user:{
             id:id,
             fullName:fullName
         }})
         }else{
-            console.log('Failed to create user!',result);
             return res.status(400).json({status:400,message:'Failed to create user!',reason:result})
         }
     }catch(err:any){
-        //watch error on server console
-        console.log(err)
+        
         return res.status(500).json({status:500,message:err.message})
     }
 }
@@ -82,7 +79,6 @@ export async function login(req:Request,res:Response){
 
 
     }catch(error:any){
-        console.log(error);
         return res.status(500).json({
             status:500,
             message:error.message

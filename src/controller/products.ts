@@ -44,7 +44,6 @@ export async function addProduct(req:Request,res:Response){
             return res.status(400).json({status:400,message:'Failed to add products!'})
         }
     }catch(error:any){
-        console.log(error);
         return res.status(500).json({status:500,message:error.message})
     }
 }
@@ -79,7 +78,6 @@ export async function updateProduct(req:Request,res:Response){
         }
 
     }catch(error:any){
-        console.log(error);
         return res.status(500).json({status:500,message:error.message})
     }
 }
@@ -99,7 +97,6 @@ export async function getSingleProduct(req:Request,res:Response){
         }
 
     }catch(error:any){
-        console.log(error);
         return res.status(500).json({status:500,message:error.message})
     }
 }
@@ -119,7 +116,6 @@ export async function getAllProducts(req:Request,res:Response){
         }
 
     }catch(error:any){
-        console.log(error);
         return res.status(500).json({status:500,message:error.message})
     }
 }
@@ -156,7 +152,6 @@ export async function sellProduct(req:Request,res:Response){
         }
 
     }catch(error:any){
-        console.log(error)
         return res.status(500).json({status:500,message:error.message})
     }
 }
